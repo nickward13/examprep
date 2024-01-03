@@ -1,0 +1,21 @@
+name: Multijob workflow to build and deploy Docker app to Azure
+
+on: workflow_dispatch
+
+# CONFIGURATION
+# For help, go to https://github.com/Azure/Actions
+#
+# Set up the following secrets in your repository:
+#   AZURE_CREDENTIALS, REGISTRY_USERNAME, REGISTRY_PASSWORD, AZURE_DEVOPS_TOKEN
+# 2. Change these variables for your configuration:
+
+jobs:
+  deploy-using-azure-pipelines:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Trigger an Azure Pipeline to deploy the app to PRODUCTION'
+      uses: Azure/pipelines@releases/v1
+      with:
+        azure-devops-project-url: 'https://dev.azure.com/hectagon/ExamPrep'
+        azure-pipeline-name: 'CICD ExamPrep' 
+        azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
